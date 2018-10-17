@@ -1,0 +1,3 @@
+.env
+apiConfigs/secrets.php
+apiConfigs/localConfigs.php

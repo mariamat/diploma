@@ -1,0 +1,67 @@
+version: '3.6'
+
+services:
+
+  diploma_mysqldb:
+    image: mysql:5.7
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      - diploma-net
+    volumes:
+      - "diploma_mysqldb-data-vol:/var/lib/mysql"
+
+  diploma_api:
+    build:
+      context: ../api
+      dockerfile: Dockerfile
+    image: diploma-api
+    networks:
+      - diploma-net
+    ports:
+      - "88:80"
+    secrets:
+      - diploma_api-secrets
+      - diploma_api-localConfigs # configs given this way because at the time of writing this file, 'docker compose up' does not support configs
+    volumes:
+      - type: bind
+        source: ../api
+        target: /var/www/html
+
+  diploma_fe:
+    build:
+      context: ../fe
+      dockerfile: Dockerfile
+    image: diploma-fe
+    networks:
+      - diploma-net
+    ports:
+      - "89:80"
+    volumes:
+      - type: bind
+        source: ../fe
+        target: /usr/src/app
+      - type: volume
+        source: routeme_fe-yarn-cache
+        target: /usr/local/share/.cache/yarn/v1
+      - type: volume
+        source: routeme_fe-npm-cache
+        target: /root/.npm
+
+networks:
+  diploma-net:
+
+volumes:
+  diploma_mysqldb-data-vol:
+  routeme_fe-yarn-cache:
+  routeme_fe-npm-cache:
+
+secrets:
+  diploma_api-secrets:
+    file: ./apiConfigs/secrets.php
+  diploma_api-localConfigs:
+    file: ./apiConfigs/localConfigs.php
