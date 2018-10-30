@@ -1,0 +1,1 @@
+docker-compose -f main-stack.prod.yml up --build
