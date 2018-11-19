@@ -51,6 +51,17 @@ services:
       - type: volume
         source: routeme_fe-npm-cache
         target: /root/.npm
+    
+  diploma_phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: ${PMA_HOST}
+      PMA_USER: ${PMA_USER}
+      PMA_PASSWORD: ${PMA_PASSWORD}
+    networks:
+      - diploma-net
+    ports:
+      - "8081:80"
 
 networks:
   diploma-net:

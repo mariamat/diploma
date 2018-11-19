@@ -17,7 +17,7 @@ require($vendorDirPath . 'yiisoft' . DIRECTORY_SEPARATOR . 'yii2' . DIRECTORY_SE
 
 $mainConfig = [
     'id' => 'diploma-api',
-	'name' => 'diplomaApi',
+    'name' => 'diplomaApi',
     'basePath' => $basePath,
     'bootstrap' => ['log'],
     'aliases' => [
@@ -29,6 +29,9 @@ $mainConfig = [
             'enableCsrfCookie' => TRUE,
             'cookieValidationKey' => $secrets['cookieValidationKey'],
             'enableCookieValidation' => TRUE,
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
         ],
         'response' => [
             'format' => \yii\web\Response::FORMAT_JSON,
@@ -36,16 +39,15 @@ $mainConfig = [
         ],
         'user' => [
             'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
 //        'mailer' => [
 //            'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
+        // send all mails to a file by default. You have to set
+        // 'useFileTransport' to false and configure a transport
+        // for the mailer to send real emails.
 //            'useFileTransport' => true,
 //        ],
         'log' => [
@@ -60,11 +62,11 @@ $mainConfig = [
             'enablePrettyUrl' => true,
             'showScriptName' => true,
             'rules' => [
-				'<controller:\w+>/<action:\w+>/<id:\d+>/*' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>/<id:\d+>/*' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>/*' => '<controller>/<action>',
             ],
         ],
-		'user' => [
+        'user' => [
             'identityClass' => 'app\models\User',
         ],
     ],

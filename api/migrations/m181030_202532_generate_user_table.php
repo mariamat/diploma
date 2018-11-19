@@ -21,6 +21,7 @@ class m181030_202532_generate_user_table extends Migration {
             'public_comment' => 'varchar(256) DEFAULT NULL',
             'private_comment' => 'varchar(256) DEFAULT NULL',
             'departmentid' => 'int(11) NOT NULL',
+            'last_login_datetime' => 'datetime NULL DEFAULT NULL',
                 ], 'ENGINE = InnoDB');
     }
 
