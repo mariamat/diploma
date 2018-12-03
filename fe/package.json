@@ -20,9 +20,13 @@
     "@angular/platform-browser": "^6.1.0",
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
+    "@types/dragula": "2.1.33",
+    "@types/materialize-css": "1.0.5",
     "core-js": "^2.5.4",
     "materialize-css": "1.0.0",
     "node-sass": "4.9.4",
+    "ngx-easy-table": "6.2.2",
+    "ngx-pagination": "3.2.1",
     "rxjs": "~6.2.0",
     "zone.js": "~0.8.26"
   },
